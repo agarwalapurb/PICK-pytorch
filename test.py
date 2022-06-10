@@ -56,16 +56,22 @@ def main(args):
             image_names = input_data_item["filenames"]
 
             output = pick_model(**input_data_item)
+            print("\nPrinting output...\n")
             print(output)
             logits = output['logits']  # (B, N*T, out_dim)
+            print("\nPrinting logits...\n")
             print(logits)
             new_mask = output['new_mask']
+            print("\nPrinting newmask...\n")
             print(new_mask)
             image_indexs = input_data_item['image_indexs']  # (B,)
+            print("\nPrinting imageindexs...\n")
             print(image_indexs)
             text_segments = input_data_item['text_segments']  # (B, num_boxes, T)
+            print("\nPrinting text_segments...\n")
             print(text_segments)
             mask = input_data_item['mask']
+            print("\nPrinting mask...\n")
             print(mask)
             # List[(List[int], torch.Tensor)]
             best_paths = pick_model.decoder.crf_layer.viterbi_tags(logits, mask=new_mask, logits_batch_first=True)
