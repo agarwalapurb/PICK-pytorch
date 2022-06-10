@@ -75,6 +75,8 @@ def main(args):
             print(mask)
             # List[(List[int], torch.Tensor)]
             best_paths = pick_model.decoder.crf_layer.viterbi_tags(logits, mask=new_mask, logits_batch_first=True)
+            print("\nPrinting best paths...\n")
+            print(best_paths)
             predicted_tags = []
             for path, score in best_paths:
                 predicted_tags.append(path)
@@ -88,17 +90,25 @@ def main(args):
             decoded_texts_list = text_index_to_str(text_segments, mask)
             print("\nPrinting decoded texts list...\n")
             print(decoded_texts_list)
-
+            print("\nPrinting decoded_tags, decoded_texts, image_index ...\n")
             for decoded_tags, decoded_texts, image_index in zip(decoded_tags_list, decoded_texts_list, image_indexs):
                 # List[ Tuple[str, Tuple[int, int]] ]
+                print(decoded_tags, decoded_texts, image_index)
+                print("\nPrinting spans ...\n")
                 spans = bio_tags_to_spans(decoded_tags, [])
+                print(spans)
+                print("\n")
                 spans = sorted(spans, key=lambda x: x[1][0])
+                print(spans)
+                print("\n")
 
                 entities = []  # exists one to many case
                 for entity_name, range_tuple in spans:
                     entity = dict(entity_name=entity_name,
                                   text=''.join(decoded_texts[range_tuple[0]:range_tuple[1] + 1]))
                     entities.append(entity)
+                print("\nPrinting entities ...\n")
+                print(entities)
 
                 result_file = output_path.joinpath(Path(test_dataset.files_list[image_index]).stem + '.txt')
                 with result_file.open(mode='w') as f:
