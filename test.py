@@ -78,13 +78,15 @@ def main(args):
             predicted_tags = []
             for path, score in best_paths:
                 predicted_tags.append(path)
-         
+            print("\nPrinting predicted tags...\n")         
             print(predicted_tags)
             # convert iob index to iob string
             decoded_tags_list = iob_index_to_str(predicted_tags)
+            print("\nPrinting decoded tags list...\n")
             print(decoded_tags_list)
             # union text as a sequence and convert index to string
             decoded_texts_list = text_index_to_str(text_segments, mask)
+            print("\nPrinting decoded texts list...\n")
             print(decoded_texts_list)
 
             for decoded_tags, decoded_texts, image_index in zip(decoded_tags_list, decoded_texts_list, image_indexs):
