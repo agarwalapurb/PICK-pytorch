@@ -79,7 +79,7 @@ def main(args):
             print(decoded_tags_list)
             # union text as a sequence and convert index to string
             decoded_texts_list = text_index_to_str(text_segments, mask)
-            print(decoded_tags_list)
+            print(decoded_texts_list)
 
             for decoded_tags, decoded_texts, image_index in zip(decoded_tags_list, decoded_texts_list, image_indexs):
                 # List[ Tuple[str, Tuple[int, int]] ]
