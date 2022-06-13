@@ -75,6 +75,7 @@ def main(args):
             print("\nPrinting mask...\n")
             print(mask)
             mask1 = torch.squeeze(mask)
+            plt.imsave("test.png",mask1.cpu(),cmap="gray",vmin=0,vmax=1)
             plt.imshow(mask1.cpu(),cmap="gray",vmin=0,vmax=1)
             plt.show()
             # List[(List[int], torch.Tensor)]
