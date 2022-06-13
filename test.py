@@ -74,7 +74,7 @@ def main(args):
             mask = input_data_item['mask']
             print("\nPrinting mask...\n")
             print(mask)
-            plt.imshow(mask,cmap="gray",vmin=0,vmax=1)
+            plt.imshow(mask.cpu(),cmap="gray",vmin=0,vmax=1)
             # List[(List[int], torch.Tensor)]
             best_paths = pick_model.decoder.crf_layer.viterbi_tags(logits, mask=new_mask, logits_batch_first=True)
             print("\nPrinting best paths...\n")
