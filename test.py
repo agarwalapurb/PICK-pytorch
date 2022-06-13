@@ -6,6 +6,7 @@ import argparse
 import torch
 from tqdm import tqdm
 from pathlib import Path
+import matplotlib.pyplot as plt
 
 from torch.utils.data.dataloader import DataLoader
 from allennlp.data.dataset_readers.dataset_utils.span_utils import bio_tags_to_spans
@@ -73,6 +74,7 @@ def main(args):
             mask = input_data_item['mask']
             print("\nPrinting mask...\n")
             print(mask)
+            plt.imshow(mask,cmap="gray",vmin=0,vmax=1)
             # List[(List[int], torch.Tensor)]
             best_paths = pick_model.decoder.crf_layer.viterbi_tags(logits, mask=new_mask, logits_batch_first=True)
             print("\nPrinting best paths...\n")
